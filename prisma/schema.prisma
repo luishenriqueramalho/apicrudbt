@@ -11,7 +11,42 @@ datasource db {
 }
 
 model Atleta {
+  id             String      @id @default(cuid())
+  nome           String
+  dataNascimento String
+  maoDominante   String
+  raquete        String
+  arena          String
+  sexo           String
+  createAt       DateTime    @default(now())
+  CatAtleta      CatAtleta[]
+}
+
+model Arena {
+  id           String      @id @default(cuid())
+  nome         String
+  dataAbertura String
+  qntQuadras   String
+  endereco     String
+  bairro       String
+  cidade       String
+  estado       String
+  status       Boolean
+  createAt     DateTime    @default(now())
+  CatAtleta    CatAtleta[]
+}
+
+model Categorias {
   id       String   @id @default(cuid())
   nome     String
+  tipo     String
   createAt DateTime @default(now())
+}
+
+model CatAtleta {
+  id        String @id @default(cuid())
+  atleta    Atleta @relation(fields: [atleta_id], references: [id])
+  atleta_id String
+  arena     Arena  @relation(fields: [arena_id], references: [id])
+  arena_id  String
 }
