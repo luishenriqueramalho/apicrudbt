@@ -16,7 +16,7 @@ model Atleta {
   dataNascimento String
   maoDominante   String
   raquete        String
-  arena          String
+  arenaPrimaria  String
   sexo           String
   createAt       DateTime    @default(now())
   CatAtleta      CatAtleta[]
