@@ -77,4 +77,32 @@ export async function ArenasRoutes(app: FastifyInstance) {
       return rep.code(500).send(data);
     }
   });
+
+  app.delete("/api/del-arenas/:id", async (req, rep) => {
+    try {
+      const deleteArenasSchema = z.object({
+        id: z.string(),
+      });
+      const { id } = deleteArenasSchema.parse(req.params);
+      const delArena = await prisma.arena.delete({
+        where: {
+          id: id,
+        },
+      });
+      const data = {
+        success: true,
+        message: "Arena deletada com sucesso!",
+        data: delArena,
+      };
+      return rep.code(200).send(data);
+    } catch (error) {
+      const data = {
+        success: true,
+        message:
+          "Não foi possível deletar a arena, tente novamente mais tarde!",
+        data: null,
+      };
+      return rep.code(500).send(data);
+    }
+  });
 }
