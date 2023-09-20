@@ -33,3 +33,8 @@ model Arena {
   status       Boolean
   createAt     DateTime @default(now())
 }
+
+model Categoria {
+  id   String @id @default(cuid())
+  nome String
+}
